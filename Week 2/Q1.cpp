@@ -1,49 +1,44 @@
-// Implement bubble sort and also print the total number of comparisons
+// Given a sorted array of positive integers containing few duplicate elements, design an algorithm and implement it using a program to find whether the given key element is present in the array or not. If present, then also find the number of copies of given key.
 
 #include <bits/stdc++.h>
 using namespace std;
 
-void swap(int &a, int &b)
+int solution(vector<int> v, int key)
 {
-    int temp = a;
-    a = b;
-    b = temp;
-}
+    int n = v.size();
 
-int bubbleSort(vector<int> &arr)
-{
-    int n = arr.size(), count = 0;
-
-    for (int i = 0; i < n - 1; i++)
+    if (binary_search(v.begin(), v.end(), key))
     {
-        for (int j = 0; j < n - 1 - i; j++)
-        {
-            count++;
-            if (arr[j] > arr[j + 1])
-            {
-                swap(arr[j], arr[j + 1]);
-            }
-        }
+        return (upper_bound(v.begin(), v.end(), key) - v.begin()) - (lower_bound(v.begin(), v.end(), key) - v.begin());
     }
 
-    return count;
+    return 0;
 }
 
 int main()
 {
-    int n;
-    cin >> n;
-    vector<int> arr(n);
+    int t, n, key, ans;
+    cin >> t;
 
-    for (int i = 0; i < n; i++)
-        cin >> arr[i];
+    do
+    {
+        cin >> n;
+        vector<int> v(n);
 
-    int comparisons = bubbleSort(arr);
+        for (int i = 0; i < n; i++)
+            cin >> v[i];
 
-    for (int i = 0; i < n; i++)
-        cout << arr[i] << " ";
+        cin >> key;
 
-    cout << "\nComparisons = " << comparisons;
+        ans = solution(v, key);
+
+        if (ans != 0)
+            cout << key << " - " << ans << "\n";
+        else
+            cout << "Key not present\n";
+
+        t--;
+    } while (t != 0);
 
     return 0;
 }

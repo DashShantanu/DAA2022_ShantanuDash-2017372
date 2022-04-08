@@ -1,51 +1,46 @@
-// Implement selection sort and also print the total number of comparisons
-
+// Given a sorted array of positive integers, design an algorithm and implement it using a program to find three indices i, j, k such that arr[i] + arr[j] == arr[k].
 #include <bits/stdc++.h>
 using namespace std;
 
-void swap(int &a, int &b)
+vector<int> solution(vector<int> v)
 {
-    int temp = a;
-    a = b;
-    b = temp;
-}
+    int n = v.size();
+    vector<int> ans;
 
-int selectionSort(vector<int> &arr)
-{
-    int n = arr.size(), min, count = 0;
+    for (int i = 0; i < n - 2; i++)
+        for (int j = i + 1; j < n - 1; j++)
+            for (int k = i + 2; k < n; k++)
+                if (v[i] + v[j] == v[k])
+                    ans = {i, j, k};
 
-    for (int i = 0; i < n; i++)
-    {
-        min = i;
-        for (int j = i + 1; j < n; j++)
-        {
-            count++;
-            if (arr[min] > arr[j])
-            {
-                min = j;
-            }
-        }
-        swap(arr[i], arr[min]);
-    }
-
-    return count;
+    return ans;
 }
 
 int main()
 {
-    int n;
-    cin >> n;
-    vector<int> arr(n);
+    int t, n;
+    vector<int> v(n), ans;
+    cin >> t;
 
-    for (int i = 0; i < n; i++)
-        cin >> arr[i];
+    while (t > 0)
+    {
+        cin >> n;
 
-    int comparisons = selectionSort(arr);
+        for (int i = 0; i < n; i++)
+            cin >> v[i];
 
-    for (int i = 0; i < n; i++)
-        cout << arr[i] << " ";
+        ans = solution(v);
 
-    cout << "\nComparisons = " << comparisons;
+        if (ans.size() == 0)
+            cout << "No sequence found\n";
+        else
+            for (int i = 0; i < 3; i++)
+                cout << ans[i] << " ";
+
+        cout << "\n";
+
+        t--;
+    }
 
     return 0;
 }
