@@ -1,47 +1,40 @@
-// Implement insertion sort and also print the total number of comparisons
+// Given an unsorted array of positive integers, design an algorithm and implement it using a program to find whether there are any duplicate elements in the array or not. (use sorting) (Time Complexity = O(n log n))
 
 #include <bits/stdc++.h>
 using namespace std;
 
-int insertionSort(vector<int> &arr)
+bool findDuplicate(vector<int> arr)
 {
-    int n = arr.size(), count = 1;
-    int i = 1, j, temp;
+    map<int, int> mp;
 
-    while (i < n)
+    for (int i = 0; i < arr.size(); i++)
     {
-        j = i - 1;
-        temp = arr[i];
-
-        while (j >= 0 && arr[j] > temp)
-        {
-            arr[j + 1] = arr[j];
-            j--;
-            count++;
-        }
-
-        arr[j + 1] = temp;
-        i++;
+        if (mp.find(arr[i]) == mp.end())
+            mp[arr[i]]++;
+        else
+            return true;
     }
 
-    return count;
+    return false;
 }
 
 int main()
 {
-    int n;
-    cin >> n;
-    vector<int> arr(n);
+    int t, n;
+    cin >> t;
 
-    for (int i = 0; i < n; i++)
-        cin >> arr[i];
+    do
+    {
+        cin >> n;
+        vector<int> v(n);
 
-    int comparisons = insertionSort(arr);
+        for (int i = 0; i < n; i++)
+            cin >> v[i];
 
-    for (int i = 0; i < n; i++)
-        cout << arr[i] << " ";
+        findDuplicate(v) ? cout << "YES\n" : cout << "NO\n";
 
-    cout << "\nComparisons = " << comparisons;
+        t--;
+    } while (t != 0);
 
     return 0;
 }

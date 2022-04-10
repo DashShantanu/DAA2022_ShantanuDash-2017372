@@ -10,54 +10,75 @@ void swap(int &a, int &b)
     b = temp;
 }
 
-int partition(vector<int> &arr, int low, int high)
+int partition(vector<int> &arr, int low, int high, int &comp, int &swaps)
 {
-    int pivot = low + (rand() % (high - low));
-    int i = low, j = high;
+    int pivot = arr[low], i = low, j = high;
 
     while (i < j)
     {
         do
         {
             i++;
-        } while (arr[i] <= arr[pivot]);
+            comp++;
+        } while (arr[i] <= pivot);
         do
         {
             j--;
-        } while (arr[j] > arr[pivot]);
+            comp++;
+        } while (arr[j] > pivot);
 
         if (i < j)
             swap(arr[i], arr[j]);
+        swaps++;
     }
 
-    swap(arr[pivot], arr[j]);
+    swap(arr[low], arr[j]);
 
     return j;
 }
 
-void quickSort(vector<int> &arr, int low, int high)
+int partition_r(vector<int> &arr, int low, int high, int &comp, int &swaps)
+{
+    srand(time(NULL));
+    int random = low + rand() % (high - low);
+
+    swap(arr[random], arr[low]);
+
+    return partition(arr, low, high, comp, swaps);
+}
+
+void quickSort(vector<int> &arr, int low, int high, int &comp, int &swaps)
 {
     if (low < high)
     {
-        int j = partition(arr, low, high);
-        quickSort(arr, low, j);
-        quickSort(arr, j + 1, high);
+        int j = partition_r(arr, low, high, comp, swaps);
+        quickSort(arr, low, j, comp, swaps);
+        quickSort(arr, j + 1, high, comp, swaps);
     }
 }
 
 int main()
 {
-    int n;
-    cin >> n;
-    vector<int> arr(n);
+    int t, n;
+    cin >> t;
 
-    for (int i = 0; i < n; i++)
-        cin >> arr[i];
+    do
+    {
+        cin >> n;
+        vector<int> v(n);
+        int comp = 0, swap = 0;
 
-    quickSort(arr, 0, n);
+        for (int i = 0; i < n; i++)
+            cin >> v[i];
 
-    for (int i = 0; i < n; i++)
-        cout << arr[i] << " ";
+        quickSort(v, 0, n, comp, swap);
+
+        for (int i = 0; i < n; i++)
+            cout << v[i] << " ";
+
+        cout << "\ncomparisons = " << comp << "\nswaps = " << swap << "\n";
+        t--;
+    } while (t != 0);
 
     return 0;
 }

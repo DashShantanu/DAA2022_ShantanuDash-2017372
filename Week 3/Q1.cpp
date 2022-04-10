@@ -1,4 +1,4 @@
-// Implement bubble sort and also print the total number of comparisons
+// Implement selection sort and also print the total number of comparisons
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -10,20 +10,22 @@ void swap(int &a, int &b)
     b = temp;
 }
 
-int bubbleSort(vector<int> &arr)
+int selectionSort(vector<int> &arr)
 {
-    int n = arr.size(), count = 0;
+    int n = arr.size(), min, count = 0;
 
-    for (int i = 0; i < n - 1; i++)
+    for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < n - 1 - i; j++)
+        min = i;
+        for (int j = i + 1; j < n; j++)
         {
             count++;
-            if (arr[j] > arr[j + 1])
+            if (arr[min] > arr[j])
             {
-                swap(arr[j], arr[j + 1]);
+                min = j;
             }
         }
+        swap(arr[i], arr[min]);
     }
 
     return count;
@@ -38,7 +40,7 @@ int main()
     for (int i = 0; i < n; i++)
         cin >> arr[i];
 
-    int comparisons = bubbleSort(arr);
+    int comparisons = selectionSort(arr);
 
     for (int i = 0; i < n; i++)
         cout << arr[i] << " ";

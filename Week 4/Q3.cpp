@@ -34,11 +34,21 @@ int partition(vector<int> &arr, int low, int high)
     return j;
 }
 
+int partition_r(vector<int> &arr, int low, int high)
+{
+    srand(time(NULL));
+    int random = low + rand() % (high - low);
+
+    swap(arr[random], arr[low]);
+
+    return partition(arr, low, high);
+}
+
 int quickSelect(vector<int> &arr, int low, int high, int k)
 {
     if (low < high)
     {
-        int j = partition(arr, low, high);
+        int j = partition_r(arr, low, high);
         if (j + 1 == k)
             return arr[j];
         else if (j + 1 > k)
@@ -65,7 +75,7 @@ int main()
 
         cin >> k;
 
-        cout << quickSelect(v, 0, n - 1, k) << "\n";
+        cout << quickSelect(v, 0, n - 1, n - k + 1) << "\n";
 
         t--;
     } while (t != 0);

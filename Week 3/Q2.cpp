@@ -1,31 +1,27 @@
-// Implement selection sort and also print the total number of comparisons
+// Implement insertion sort and also print the total number of comparisons
 
 #include <bits/stdc++.h>
 using namespace std;
 
-void swap(int &a, int &b)
+int insertionSort(vector<int> &arr)
 {
-    int temp = a;
-    a = b;
-    b = temp;
-}
+    int n = arr.size(), count = 1;
+    int i = 1, j, temp;
 
-int selectionSort(vector<int> &arr)
-{
-    int n = arr.size(), min, count = 0;
-
-    for (int i = 0; i < n; i++)
+    while (i < n)
     {
-        min = i;
-        for (int j = i + 1; j < n; j++)
+        j = i - 1;
+        temp = arr[i];
+
+        while (j >= 0 && arr[j] > temp)
         {
+            arr[j + 1] = arr[j];
+            j--;
             count++;
-            if (arr[min] > arr[j])
-            {
-                min = j;
-            }
         }
-        swap(arr[i], arr[min]);
+
+        arr[j + 1] = temp;
+        i++;
     }
 
     return count;
@@ -40,7 +36,7 @@ int main()
     for (int i = 0; i < n; i++)
         cin >> arr[i];
 
-    int comparisons = selectionSort(arr);
+    int comparisons = insertionSort(arr);
 
     for (int i = 0; i < n; i++)
         cout << arr[i] << " ";
