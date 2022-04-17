@@ -5,13 +5,12 @@ using namespace std;
 
 bool findDuplicate(vector<int> arr)
 {
-    map<int, int> mp;
+    int n = arr.size();
+    sort(arr.begin(), arr.end());
 
-    for (int i = 0; i < arr.size(); i++)
+    for (int i = 0; i < n - 1; i++)
     {
-        if (mp.find(arr[i]) == mp.end())
-            mp[arr[i]]++;
-        else
+        if (arr[i] == arr[i + 1])
             return true;
     }
 

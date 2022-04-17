@@ -1,31 +1,28 @@
-// Implement selection sort and also print the total number of comparisons
+// Given an unsorted array of integers, design an algorithm and a program to sort the array using insertion sort. Your program should be able to find number of comparisons and shifts ( shifts - total number of times the array elements are shifted from their place) required for sorting the array.
 
 #include <bits/stdc++.h>
 using namespace std;
 
-void swap(int &a, int &b)
+void insertionSort(vector<int> &arr, int &count, int &shift)
 {
-    int temp = a;
-    a = b;
-    b = temp;
-}
+    int n = arr.size(), i = 1, j, temp;
 
-void selectionSort(vector<int> &arr, int &count)
-{
-    int n = arr.size(), min;
-
-    for (int i = 0; i < n - 1; i++)
+    while (i < n)
     {
-        min = i;
-        for (int j = i + 1; j < n; j++)
+        j = i - 1;
+        temp = arr[i];
+
+        while (j >= 0 && arr[j] > temp)
         {
             count++;
-            if (arr[min] > arr[j])
-            {
-                min = j;
-            }
+            shift++;
+            arr[j + 1] = arr[j];
+            j--;
         }
-        swap(arr[i], arr[min]);
+
+        arr[j + 1] = temp;
+        i++;
+        shift++;
     }
 }
 
@@ -36,19 +33,19 @@ int main()
 
     while (t > 0)
     {
-        int count = 0;
+        int count = 0, shift = 0;
         cin >> n;
         vector<int> arr(n);
 
         for (int i = 0; i < n; i++)
             cin >> arr[i];
 
-        selectionSort(arr, count);
+        insertionSort(arr, count, shift);
 
         for (int i = 0; i < n; i++)
             cout << arr[i] << " ";
 
-        cout << "\ncomparisons = " << count << "\nswaps = " << n - 1 << "\n";
+        cout << "\ncomparisons = " << count << "\nshifts = " << shift << "\n";
 
         t--;
     }
