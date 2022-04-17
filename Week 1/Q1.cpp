@@ -1,38 +1,44 @@
+// Given an array of non-negative integers, design a linear algorithm and implement it using a program to find whether given key element is present in the array or not. Also, find total number of comparisons for each input case. (Time Complexity = O(n), where n is the size of input)
+
 #include <bits/stdc++.h>
 using namespace std;
 
-int searchArr(vector<int> arr, int n, int key)
+bool linearSearch(vector<int> arr, int key, int &count)
 {
-    int count = 0;
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < arr.size(); i++)
     {
         count++;
         if (key == arr[i])
-        {
-            cout << "Comparisons = " << count << "\n";
-            return i;
-        }
+            return true;
     }
-
-    cout << "Comparisons = " << count << "\n";
-    return -1;
+    return false;
 }
 
 int main()
 {
-    vector<int> arr;
-    int n, val, key;
-    cin >> n;
+    int t, n, key, ans, count;
+    cin >> t;
 
-    for (int i = 0; i < n; i++)
+    do
     {
-        cin >> val;
-        arr.push_back(val);
-    }
+        cin >> n;
+        vector<int> v(n);
+        count = 0;
 
-    cin >> key;
+        for (int i = 0; i < n; i++)
+            cin >> v[i];
 
-    cout << searchArr(arr, n, key);
+        cin >> key;
+
+        ans = linearSearch(v, key, count);
+
+        if (ans)
+            cout << "Present " << count << "\n";
+        else
+            cout << "Not Present " << count << "\n";
+
+        t--;
+    } while (t != 0);
 
     return 0;
 }

@@ -3,9 +3,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int insertionSort(vector<int> &arr)
+void insertionSort(vector<int> &arr, int &count, int &shift)
 {
-    int n = arr.size(), count = 1;
+    int n = arr.size();
     int i = 1, j, temp;
 
     while (i < n)
@@ -15,33 +15,41 @@ int insertionSort(vector<int> &arr)
 
         while (j >= 0 && arr[j] > temp)
         {
+            count++;
+            shift++;
             arr[j + 1] = arr[j];
             j--;
-            count++;
         }
 
         arr[j + 1] = temp;
         i++;
+        shift++;
     }
-
-    return count;
 }
 
 int main()
 {
-    int n;
-    cin >> n;
-    vector<int> arr(n);
+    int t, n;
+    cin >> t;
 
-    for (int i = 0; i < n; i++)
-        cin >> arr[i];
+    while (t > 0)
+    {
+        int count = 0, shift = 0;
+        cin >> n;
+        vector<int> arr(n);
 
-    int comparisons = insertionSort(arr);
+        for (int i = 0; i < n; i++)
+            cin >> arr[i];
 
-    for (int i = 0; i < n; i++)
-        cout << arr[i] << " ";
+        insertionSort(arr, count, shift);
 
-    cout << "\nComparisons = " << comparisons;
+        for (int i = 0; i < n; i++)
+            cout << arr[i] << " ";
+
+        cout << "\ncomparisons = " << count << "\nshifts = " << shift << "\n";
+
+        t--;
+    }
 
     return 0;
 }

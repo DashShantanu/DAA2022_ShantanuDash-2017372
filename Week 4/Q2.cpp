@@ -28,11 +28,14 @@ int partition(vector<int> &arr, int low, int high, int &comp, int &swaps)
         } while (arr[j] > pivot);
 
         if (i < j)
+        {
             swap(arr[i], arr[j]);
-        swaps++;
+            swaps++;
+        }
     }
 
     swap(arr[low], arr[j]);
+    swaps++;
 
     return j;
 }

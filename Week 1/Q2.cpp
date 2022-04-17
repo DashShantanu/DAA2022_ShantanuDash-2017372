@@ -1,7 +1,9 @@
+// Given an already sorted array of positive integers, design an algorithm and implement it using a program to find whether given key element is present in the array or not. Also, find total number of comparisons for each input case. (Time Complexity = O(nlogn), where n is the size of input).
+
 #include <bits/stdc++.h>
 using namespace std;
 
-int binarySearch(vector<int> arr, int i, int j, int key)
+int binarySearch(vector<int> arr, int i, int j, int key, int &count)
 {
     if (i > j)
     {
@@ -9,30 +11,41 @@ int binarySearch(vector<int> arr, int i, int j, int key)
     }
 
     int mid = (i + j) / 2;
+    count++;
 
     if (arr[mid] == key)
         return mid;
     else if (key > arr[mid])
-        return binarySearch(arr, mid + 1, j, key);
+        return binarySearch(arr, mid + 1, j, key, count);
     else
-        return binarySearch(arr, i, mid - 1, key);
+        return binarySearch(arr, i, mid - 1, key, count);
 }
 
 int main()
 {
-    vector<int> arr = {1, 2, 3, 4, 5, 6};
-    int n, val, key;
-    cin >> n;
+    int t, n, key, ans, count;
+    cin >> t;
 
-    for (int i = 0; i < n; i++)
+    do
     {
-        cin >> val;
-        arr.push_back(val);
-    }
+        cin >> n;
+        vector<int> v(n);
+        count = 0;
 
-    cin >> key;
+        for (int i = 0; i < n; i++)
+            cin >> v[i];
 
-    cout << binarySearch(arr, 0, 5, key);
+        cin >> key;
+
+        ans = binarySearch(v, 0, n - 1, key, count);
+
+        if (ans)
+            cout << "Present " << count << "\n";
+        else
+            cout << "Not Present " << count << "\n";
+
+        t--;
+    } while (t != 0);
 
     return 0;
 }
