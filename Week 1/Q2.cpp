@@ -5,21 +5,38 @@ using namespace std;
 
 int binarySearch(vector<int> arr, int i, int j, int key, int &count)
 {
-    if (i > j)
+    int mid;
+    while (i <= j)
     {
-        return -1;
+        mid = (i + j) / 2;
+        count++;
+        if (arr[mid] == key)
+            return mid;
+        else if (arr[mid] > key)
+            j = mid - 1;
+        else
+            i = mid + 1;
     }
-
-    int mid = (i + j) / 2;
-    count++;
-
-    if (arr[mid] == key)
-        return mid;
-    else if (key > arr[mid])
-        return binarySearch(arr, mid + 1, j, key, count);
-    else
-        return binarySearch(arr, i, mid - 1, key, count);
+    return -1;
 }
+
+// int binarySearch(vector<int> arr, int i, int j, int key, int &count)
+// {
+//     if (i > j)
+//     {
+//         return -1;
+//     }
+
+//     int mid = (i + j) / 2;
+//     count++;
+
+//     if (arr[mid] == key)
+//         return mid;
+//     else if (key > arr[mid])
+//         return binarySearch(arr, mid + 1, j, key, count);
+//     else
+//         return binarySearch(arr, i, mid - 1, key, count);
+// }
 
 int main()
 {

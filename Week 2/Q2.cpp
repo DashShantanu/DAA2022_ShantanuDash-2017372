@@ -2,20 +2,36 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+bool twoSum(vector<int> v, int j, int k)
+{
+    int n = v.size(), i = 0;
+
+    while (i < j)
+    {
+        if (v[i] + v[j] == v[k])
+        {
+            cout << i + 1 << " " << j + 1 << " " << k + 1 << endl;
+            return true;
+        }
+        else if (v[i] + v[j] < v[k])
+            i++;
+        else
+            j--;
+    }
+
+    return false;
+}
+
 void solution(vector<int> v)
 {
     int n = v.size();
+    bool flag = false;
 
-    for (int i = 0; i < n - 2; i++)
-        for (int j = i + 1; j < n - 1; j++)
-            for (int k = j + 1; k < n; k++)
-                if (v[i] + v[j] == v[k])
-                {
-                    cout << i + 1 << ", " << j + 1 << ", " << k + 1 << "\n";
-                    return;
-                }
+    for (int i = n - 1; i > 1; i--)
+        flag = flag || twoSum(v, i - 1, i);
 
-    cout << "No sequence found\n";
+    if (!flag)
+        cout << "No sequence found\n";
 }
 
 int main()
