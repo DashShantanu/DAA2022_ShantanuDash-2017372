@@ -1,0 +1,1 @@
+{"name":"Local: Q1","url":"d:\\Current Work\\4th sem notes\\DAA Lab\\Week 7\\Q1.cpp","tests":[{"id":1652421557607,"input":"5\n0 4 1 0 0\n0 0 0 0 4\n0 2 0 4 0\n0 0 0 0 4\n0 0 0 0 0\n1","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Current Work\\4th sem notes\\DAA Lab\\Week 7\\Q1.cpp","group":"local","local":true}
