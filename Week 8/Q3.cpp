@@ -104,10 +104,5 @@ int main()
     }
     cout << total << "\n";
 
-    // for (int i = 0; i < edges.size(); i++)
-    // {
-    //     cout << edges[i].src << " " << edges[i].dst << " " << edges[i].weight << endl;
-    // }
-
     return 0;
 }
