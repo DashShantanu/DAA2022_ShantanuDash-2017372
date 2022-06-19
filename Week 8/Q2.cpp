@@ -102,7 +102,7 @@ int main()
     {
         total += it.weight;
     }
-    cout << total << "\n";
+    cout << "Minimum Spanning Weight: " << total << "\n";
 
     // for (int i = 0; i < edges.size(); i++)
     // {

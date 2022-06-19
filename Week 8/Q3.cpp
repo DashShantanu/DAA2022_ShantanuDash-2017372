@@ -102,7 +102,7 @@ int main()
     {
         total += it.weight;
     }
-    cout << total << "\n";
+    cout << "Maximum Spanning Weight: " << total << "\n";
 
     return 0;
 }

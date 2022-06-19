@@ -60,7 +60,7 @@ int main()
             total += weight[i];
     }
 
-    cout << total << "\n";
+    cout << "Minimum Spanning Weight: " << total << "\n";
 
     // for (int i = 1; i <= n; i++)
     // {

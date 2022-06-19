@@ -50,6 +50,7 @@ int main()
 
     floydWarshall(graph, result);
 
+    cout << "Shortest Distance Matrix:\n";
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < n; j++)

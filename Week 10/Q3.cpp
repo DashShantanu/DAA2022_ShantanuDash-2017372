@@ -37,7 +37,10 @@ int main()
         }
     }
     if (flag)
+    {
         cout << "no\n";
+        return 0;
+    }
 
     cout << findMedian(mp) << "\n";
 

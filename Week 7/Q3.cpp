@@ -56,7 +56,7 @@ int main()
     if (minWeight == INT_MAX)
         cout << "No path found" << endl;
     else
-        cout << minWeight << endl;
+        cout << "Weight of shortest path from (" << src << "," << dest << ") with " << k << " edges : " << minWeight << endl;
 
     // for (int i = 1; i <= n; i++)
     // {
